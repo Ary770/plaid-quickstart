@@ -41,7 +41,7 @@
         </div>
 
         <div class="box">
-            <button id="get-transactions-btn">Get Transactions</button>
+            <button id="get-transactions-btn">Get Transactions Over $50</button>
             <div id="get-transactions-data"></div>
         </div>
 
@@ -141,7 +141,10 @@
         } else {
           $('#get-transactions-data').slideUp(function() {
             var html = '';
-            data.transactions.forEach(function(txn, idx) {
+            transactionsOver50 = data.transactions.filter(transaction =>
+              transaction.amount >= 50
+            )
+            transactionsOver50.forEach(function(txn, idx) {
               html += '<div class="inner">';
               html += '<strong>' + txn.name + '</strong><br>';
               html += '$' + txn.amount;
