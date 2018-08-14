@@ -44,6 +44,16 @@
             <button id="get-transactions-btn">Get Transactions</button>
             <div id="get-transactions-data"></div>
         </div>
+
+        <div class="box">
+            <button id="get-income-btn">Get Income</button>
+            <div id="get-income-data"></div>
+        </div>
+
+        <div class="box">
+            <button id="get-identity-btn">Get Identity</button>
+            <div id="get-identity-data"></div>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
@@ -146,6 +156,50 @@
         }
       });
     });
+
+    $('#get-income-btn').on('click', function(e) {
+      $.get('/income', function(data) {
+        $('#get-income-data').slideUp(function() {
+            if(data.error)
+                $(this).html('<p>' + data.error + '</p>').slideDown();
+            else {
+                var html = '<div class="inner">';
+                html += '<p>Here\'s some basic information about your Income:</p>';
+                html += '<p>Last year income: ' + data.income.last_year_income +'</p>';
+                html += '<p>Number of income streams: ' + data.income.number_of_income_streams + '</p>';
+                html += '<p>Projected yearly income: ' + data.income.projected_yearly_income + '</p>';
+                html += '</div>';
+
+                data.income.income_streams.forEach(income => {
+                  html += '<div class="inner">';
+                  html += '<p>Income Stream: <strong>' + income.name + '</strong></p>';
+                  html += '<p>Monthly Income: ' + income.monthly_income + '</p>';
+                  html += '</div>';
+                })
+                $(this).html(html).slideDown();
+            }
+        });
+      })
+    })
+
+    $('#get-identity-btn').on('click', function(e) {
+      $.get('/identity', function(data) {
+        console.log(data)
+        $('#get-identity-data').slideUp(function() {
+            if(data.error)
+                $(this).html('<p>' + data.error + '</p>').slideDown();
+            else {
+                var html = '<div class="inner">';
+                html += '<p>Name: ' + data.identity.names[0] +'</p>';
+                html += '<p>Email: ' + data.identity.emails[0].data + '</p>';
+                html += '<p>Phone Numner: ' + data.identity.phone_numbers[0].data + '</p>';
+                html += '</div>';
+
+                $(this).html(html).slideDown();
+            }
+        });
+      })
+    })
     })(jQuery);
     </script>
 </body>

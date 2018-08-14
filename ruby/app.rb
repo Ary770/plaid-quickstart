@@ -1,6 +1,7 @@
 require 'date'
 require 'sinatra'
 require 'plaid'
+require 'pry'
 
 set :public_folder, File.dirname(__FILE__) + '/public'
 
@@ -53,4 +54,16 @@ get '/create_public_token' do
   public_token_response = client.item.public_token.exchange(access_token)
   content_type :json
   public_token_response.to_json
+end
+
+get '/income' do
+  income_response = client.income.get(access_token)
+  content_type :json
+  income_response.to_json
+end
+
+get '/identity' do
+  identity_response = client.identity.get(access_token)
+  content_type :json
+  identity_response.to_json
 end
