@@ -74,6 +74,9 @@
                     });
                 });
             },
+            onExit: function(error, metadata) {
+              console.log(error)
+            },
         });
 
         $('#link-btn').on('click', function(e) {
@@ -203,6 +206,7 @@
         });
       })
     })
+
     })(jQuery);
     </script>
 </body>

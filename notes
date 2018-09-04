@@ -1,0 +1,15 @@
+curl -X POST https://sandbox.plaid.com/institutions/search \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query": "BB&T",
+    "products": ["auth"],
+    "public_key": "ecd8d74d7cdd7dd2ba692477f8d723"
+  }'
+
+
+  curl -X POST https://sandbox.plaid.com/institutions/get_by_id \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "public_key": "ecd8d74d7cdd7dd2ba692477f8d723",
+    "institution_id": "ins_2"
+  }'

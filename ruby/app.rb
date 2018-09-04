@@ -2,6 +2,7 @@ require 'date'
 require 'sinatra'
 require 'plaid'
 require 'pry'
+require 'dotenv/load'
 
 set :public_folder, File.dirname(__FILE__) + '/public'
 
